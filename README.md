@@ -117,3 +117,6 @@ Modeling work is documented in:
 
 ## Notes
 This project is designed as an academic proof-of-concept. The synthetic dataset and modeling pipeline demonstrate methodology rather than real-world deployment accuracy.
+
+Author: Ayush Choudhury
+
