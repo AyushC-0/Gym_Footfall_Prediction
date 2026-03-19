@@ -1,122 +1,124 @@
-# University Gym Footfall Prediction System
+# WEGOGYM
+
+An advanced, machine-learning-powered gym footfall prediction system designed to optimize gym operations and enhance user experience.
 
 ## Project Overview
-This project focuses on predicting daily gym footfall for a university campus using machine learning. Gym usage is influenced by multiple factors such as academic schedules, seasonal patterns, weather conditions, student population dynamics, and equipment maintenance. The objective is to build a data-driven system that analyzes historical patterns and provides accurate, explainable predictions to support operational planning.
 
-The project is developed in a step-by-step, academically structured manner, starting from data generation and preprocessing, followed by exploratory analysis and baseline model building.
+This project leverages historical data and ensemble learning (Random Forest and XGBoost) to forecast gym attendance based on a variety of features including:
 
-## Problem Statement
-University gym facilities experience significant variation in daily footfall due to academic activities, vacations, weather conditions, and operational constraints. Manual estimation of gym usage often leads to inefficient planning and resource utilization.  
-The goal of this project is to predict daily gym footfall by modeling these influencing factors using traditional machine learning techniques.
+- **Temporal factors**: Date, Day of Week, Month, Hour.
+- **Academic factors**: Exam phases (Midterm/Endterm), Academic Load/Stress Levels.
+- **Environmental factors**: Weather conditions (Rain, Heat, Cold), Gym Maintenance schedules.
+- **Population data**: Active student population and adoption ratios.
 
-## Data Description
+The system features two primary interfaces:
 
-### Data Source
-- The dataset is **synthetically generated** using a rule-based Python script.
-- No real student or gym usage data is used.
+1. **Streamlit Dashboard**: A high-end, interactive analytical tool for staff and management.
+2. **FastAPI Backend + Web UI**: A lightweight API-driven interface with a modern frontend.
 
-### Time Range & Granularity
-- **Start Date:** January 1, 2021  
-- **End Date:** January 1, 2026  
-- **Frequency:** Daily  
+---
 
-### Key Constraints Modeled
-- Gym operates **Monday–Saturday**, closed on Sundays
-- Annual vacation closure from **May to June**
-- Quarterly exams (midterm and endterm) reduce footfall
-- Weather effects (rain, heat, cold) influence attendance
-- Equipment maintenance reduces effective capacity
-- Campus population varies between 200 and 250 students
+## Repository Structure
 
-The dataset is generated in a reproducible manner and exported as a CSV for development and experimentation.
+```text
+.
+├── dashboard_fastapi/       # FastAPI Backend & Web UI
+│   ├── main.py              # API Entry point
+│   └── static/              # HTML/JS/CSS Frontend
+├── dashboard_streamlit/     # Streamlit Analytics Dashboard
+│   ├── main.py              # Dashboard Entry point
+│   └── generate_data.py     # Local data generation utility
+├── data/                    # Dataset storage (CSV/DB - ignored by git)
+├── models/                  # ML Models & Metadata
+│   └── metadata.json        # Detailed model performance and feature info
+├── scripts/                 # Training & Preprocessing scripts
+│   ├── train_random_forest.py
+│   ├── train_xgboost.py
+│   └── data_cleaning_preprocessing.py
+├── requirements.txt         # Project dependencies
+└── .gitignore               # Standard ignores + Binary data exclusion
+```
 
-## Data Cleaning & Preprocessing
-- Converted date fields to proper datetime format
-- Verified absence of missing or invalid values
-- Ensured zero footfall on non-operational days
-- One-hot encoded categorical variables
-- Converted all boolean features to numeric (0/1)
-- Removed non-modeling and intermediate synthetic variables
-- Prepared a clean, model-ready dataset
+---
 
-All preprocessing steps are documented in:
+## Getting Started
 
-## Exploratory Data Analysis (EDA)
+### 1. Installation
 
-EDA was conducted to validate the realism of the synthetic data and understand key patterns.
+Clone the repository and install dependencies:
 
-### Key Analyses Performed
-- Daily footfall time-series visualization
-- Monthly seasonality analysis
-- Exam phase impact analysis
-- Weather and maintenance impact analysis
-- Capacity utilization distribution
-- Correlation analysis
-- Seasonal decomposition
-- Autocorrelation (ACF) analysis
+```bash
+pip install -r requirements.txt
+```
 
-### Key Insights
-- Strong annual seasonality and academic influence
-- Clear footfall drops during exams and vacations
-- Non-stationary behavior with temporal dependence
-- No single dominant feature; multiple interacting factors
+### 2. Data & Models
+>
+> [!NOTE]
+> Database files (`.db`, `.csv`) and model binaries (`.pkl`) are excluded from this repository to maintain a clean environment.
 
-EDA is documented in:
+To set up the environment:
 
+1. Run `python dashboard_streamlit/generate_data.py` to create the synthetic dataset.
+2. Run scripts in `scripts/` to train the models and save them to the `models/` directory.
+3. Refer to `models/metadata.json` for the expected model performance and architectural details.
 
-## Model Building (Current Progress)
+### 3. Running the Applications
 
-### Approach
-The problem is formulated as a **time-aware supervised regression task**, not a pure time-series model. Temporal order is respected during training and testing, while contextual features (academic, environmental, operational) are explicitly modeled.
+#### Streamlit Dashboard
 
-### Train–Test Split
-- **Training:** 2021–2024
-- **Testing:** 2025
-- No random shuffling (to prevent data leakage)
+```bash
+streamlit run dashboard_streamlit/main.py
+```
 
-### Baseline Models Implemented
+#### FastAPI Backend
 
-#### 1. Linear Regression (Full Feature Set)
-- Used as an upper-bound linear baseline
-- Achieved strong performance due to derived and deterministic features
+```bash
+uvicorn dashboard_fastapi.main:app --reload
+```
 
-#### 2. Optimized Linear Regression (Feature Drop)
-- Removed derived and redundant features to test true linear capacity
-- Performance dropped significantly, highlighting strong non-linear dependencies
+View the web interface at `http://127.0.0.1:8000`.
 
-This comparison demonstrates that gym footfall cannot be effectively modeled using simple linear assumptions alone.
+---
 
-Modeling work is documented in:
+## Model Methodology
 
-## Key Takeaways So Far
-- Gym footfall is driven by **non-linear interactions**
-- Linear models have limited explanatory power without derived features
-- Ensemble-based models are required for accurate prediction
-- The project setup follows sound academic and machine learning practices
+We compare three distinct approaches:
 
-## Tools & Technologies
-- Python
-- Pandas, NumPy
-- Scikit-learn
-- Matplotlib, Seaborn
-- Jupyter Notebook
+- **Baseline (Logistic Regression)**: A simple linear approach to establish a performance floor.
+- **Random Forest**: An ensemble of 100+ decision trees capturing complex non-linear interactions.
+- **XGBoost**: Gradient boosted trees optimized for high precision in hourly forecasting.
 
-## Current Status
-#### COMPLETED...
-- Data generation  
-- Data cleaning & preprocessing  
-- Exploratory Data Analysis  
-- Baseline model building  
-- Dashboard development v1
+Detailed metrics and feature importances can be found in [models/metadata.json](models/metadata.json).
 
-#### PENDING...
-- Random Forest model training  
-- Model comparison & evaluation  
-- Dashboard development v2  
-- SQL database integration  
+---
 
-## Notes
-This project is designed as an academic proof-of-concept. The synthetic dataset and modeling pipeline demonstrate methodology rather than real-world deployment accuracy.
+## ML Pipeline
 
-Author: Ayush Choudhury
+The project follows a structured machine learning pipeline to ensure data consistency and model reliability:
 
+```mermaid
+graph TD
+    A[Data Generation] -->|Synthesize| B[Raw Data SQL/CSV]
+    B -->|Preprocessing| C[Engineered Features]
+    C -->|Training| D[Ensemble Models RF/XGB]
+    D -->|Evaluation| E[Performance Metrics]
+    E -->|Deployment| F[Streamlit/FastAPI Apps]
+    F -->|Monitoring| G[User Analytics]
+```
+
+1. **Generation & Collection**: Synthetic gym data is generated to simulate complex real-world patterns like holiday shifts and weather impacts.
+2. **Preprocessing & Engineering**: Scripts automate data cleaning, temporal feature extraction (sine/cosine transformations), and categorical encoding.
+3. **Training & Validation**: Multi-model training approach using Random Forest and XGBoost with hyperparameter tuning.
+4. **Serving**: Reliable prediction APIs and interactive dashboards for end-user accessibility.
+
+---
+
+## Design Aesthetics
+
+The dashboards are designed with a **premium dark-mode aesthetic**, utilizing glassmorphism, dynamic Plotly visualizations, and responsive layouts to provide a professional user experience.
+
+---
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
