@@ -1,0 +1,28 @@
+{
+  "artifact_name": "preprocessor",
+  "artifact_type": "ColumnTransformer",
+  "description": "Preprocessing pipeline for scaling numerical features and one-hot encoding categorical features.",
+  "numerical_features": [
+    "hour",
+    "day_of_week",
+    "month",
+    "year",
+    "active_student_population"
+  ],
+  "categorical_features": [
+    "session",
+    "exam_phase",
+    "weather_condition",
+    "maintenance_severity"
+  ],
+  "binary_features": [
+    "is_sunday",
+    "is_vacation",
+    "is_gym_open",
+    "interuni_event",
+    "maintenance_flag"
+  ],
+  "framework": "scikit-learn",
+  "version": "v2",
+  "creation_script": "V2/preprocess_db.py"
+}

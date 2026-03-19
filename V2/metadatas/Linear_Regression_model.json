@@ -1,0 +1,25 @@
+{
+  "model_name": "Linear_Regression_model",
+  "model_type": "Linear Regression",
+  "description": "V2 Linear Regression model for predicting hourly gym footfall.",
+  "target_variable": "hourly_gym_footfall",
+  "features": [
+    "hour",
+    "day_of_week",
+    "month",
+    "year",
+    "active_student_population",
+    "session",
+    "exam_phase",
+    "weather_condition",
+    "maintenance_severity",
+    "is_sunday",
+    "is_vacation",
+    "is_gym_open",
+    "interuni_event",
+    "maintenance_flag"
+  ],
+  "framework": "scikit-learn",
+  "version": "v2",
+  "training_script": "V2/train_models.py"
+}

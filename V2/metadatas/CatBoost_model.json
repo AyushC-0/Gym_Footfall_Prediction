@@ -1,0 +1,25 @@
+{
+  "model_name": "CatBoost_model",
+  "model_type": "CatBoost Regressor",
+  "description": "V2 CatBoost model for predicting hourly gym footfall.",
+  "target_variable": "hourly_gym_footfall",
+  "features": [
+    "hour",
+    "day_of_week",
+    "month",
+    "year",
+    "active_student_population",
+    "session",
+    "exam_phase",
+    "weather_condition",
+    "maintenance_severity",
+    "is_sunday",
+    "is_vacation",
+    "is_gym_open",
+    "interuni_event",
+    "maintenance_flag"
+  ],
+  "framework": "catboost",
+  "version": "v2",
+  "training_script": "V2/train_models.py"
+}
