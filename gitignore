@@ -1,0 +1,21 @@
+# Standard Python ignores
+__pycache__/
+*.py[cod]
+*$py.class
+.env
+.venv
+env/
+venv/
+
+# Project Specific: Exclude binary data and models as requested
+*.db
+*.csv
+*.pkl
+
+# Logs
+*.log
+catboost_info/
+
+# OS specific
+.DS_Store
+Thumbs.db
