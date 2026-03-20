@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>WeGoGym - Project Overview</title>
+<!-- Tailwind CSS v3 CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&amp;family=Inter:wght@400;700;900&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<style data-purpose="base-typography">
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0a0a0a;
+      color: #fafafa;
+      overflow-x: hidden;
+    }
+    h1, h2, h3, .heading-font {
+      font-family: 'Oswald', sans-serif;
+      text-transform: uppercase;
+    }
+    .torn-paper {
+      clip-path: polygon(0% 2%, 5% 0%, 10% 3%, 15% 1%, 20% 4%, 25% 1%, 30% 3%, 35% 0%, 40% 4%, 45% 1%, 50% 3%, 55% 0%, 60% 4%, 65% 1%, 70% 3%, 75% 1%, 80% 4%, 85% 1%, 90% 3%, 95% 0%, 100% 2%, 100% 98%, 95% 100%, 90% 97%, 85% 99%, 80% 96%, 75% 100%, 70% 97%, 65% 99%, 60% 96%, 55% 100%, 50% 97%, 45% 99%, 40% 96%, 35% 100%, 30% 97%, 25% 99%, 20% 96%, 15% 100%, 10% 97%, 5% 99%, 0% 98%);
+    }
+</style>
+<style data-purpose="custom-layout">
+    .halftone-overlay { background-image: radial-gradient(#ffffff22 1px, transparent 0); background-size: 10px 10px; }
+    .bg-off-white { background-color: #fafafa; }
+    .text-off-white { color: #fafafa; }
+    .bg-deep-red { background-color: #7f1d1d; }
+</style>
+</head>
+<body class="bg-black relative text-off-white min-h-screen flex flex-col">
+
+<!-- BEGIN: Navigation -->
+<nav class="fixed top-0 w-full z-50 p-6 flex justify-between items-center mix-blend-difference bg-black/50 backdrop-blur-md border-b-2 border-gray-900">
+<div class="flex items-center space-x-4">
+<div class="bg-off-white text-black px-4 py-1 font-black italic text-xl torn-paper cursor-pointer" onclick="window.location.href='/'">WEGOGYM</div>
+</div>
+<div class="hidden md:flex space-x-8 text-sm font-bold uppercase tracking-widest text-off-white items-center">
+<a class="hover:text-red-500 transition" href="/">Home</a>
+<a class="hover:text-red-500 transition" href="/predict">Prediction Engine</a>
+<a class="hover:text-red-500 transition" href="/compare">Model Comparison</a>
+<a class="hover:text-red-500 transition text-red-500" href="/overview">Project Overview</a>
+<a class="text-emerald-500 hover:text-emerald-400 font-black italic transition-colors flex items-center gap-1" href="https://forms.cloud.microsoft/r/n44am7K2GN" target="_blank"><span class="material-symbols-outlined text-[1.1rem]">reviews</span> Feedback</a>
+</div>
+</nav>
+
+<main class="flex-1 py-32 px-6 lg:px-20 max-w-7xl mx-auto w-full relative z-10">
+    <div class="mb-16 border-b-4 border-gray-800 pb-8">
+        <span class="text-red-600 font-black tracking-widest text-sm uppercase">Documentation</span>
+        <h1 class="text-6xl font-black italic text-off-white leading-none tracking-tight mt-2 heading-font">PROJECT OVERVIEW</h1>
+        <p class="text-gray-400 text-lg max-w-2xl mt-4 font-bold uppercase">
+            Explore the lifecycle of WeGoGym, from raw data ingestion to the final predictive model used for optimizing gym management.
+        </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+        <!-- Section A: Development Timeline -->
+        <div class="lg:col-span-5 relative">
+            <div class="absolute inset-0 halftone-overlay opacity-10 pointer-events-none"></div>
+            <div class="flex items-center gap-3 mb-10 border-b-2 border-gray-800 pb-4">
+                <span class="material-symbols-outlined text-red-600 text-3xl">timeline</span>
+                <h2 class="text-3xl font-black italic heading-font text-off-white">DEV TIMELINE</h2>
+            </div>
+            
+            <div class="relative flex flex-col gap-0 ml-4 border-l-4 border-gray-800 pl-8 pb-10">
+                <!-- Step 1: Jan 15 -->
+                <div class="relative pb-12 group">
+                    <div class="absolute -left-[50px] top-0 size-8 bg-red-600 flex items-center justify-center border-4 border-black group-hover:bg-off-white transition-colors"></div>
+                    <span class="text-sm font-black text-red-600 tracking-widest uppercase block mb-1">JAN 15, 2026</span>
+                    <h3 class="font-black italic text-xl uppercase text-off-white">Project Kickoff</h3>
+                    <p class="text-gray-400 text-sm mt-2 font-bold uppercase">Defining requirements for a predictive gym management tool and outlining the initial system architecture.</p>
+                    <span class="inline-block bg-[#111] text-gray-500 px-3 py-1 font-black text-[10px] tracking-widest mt-4 uppercase border-2 border-gray-800">Completed</span>
+                </div>
+                <!-- Step 2: Jan 22 -->
+                <div class="relative pb-12 group">
+                    <div class="absolute -left-[50px] top-0 size-8 bg-blue-600 flex items-center justify-center border-4 border-black group-hover:bg-off-white transition-colors"></div>
+                    <span class="text-sm font-black text-blue-600 tracking-widest uppercase block mb-1">JAN 22, 2026</span>
+                    <h3 class="font-black italic text-xl uppercase text-off-white">Data Scraping & Build</h3>
+                    <p class="text-gray-400 text-sm mt-2 font-bold uppercase">Aggregating historical entry/exit logs from multiple facilities and building the central database pipeline.</p>
+                    <span class="inline-block bg-[#111] text-gray-500 px-3 py-1 font-black text-[10px] tracking-widest mt-4 uppercase border-2 border-gray-800">Completed</span>
+                </div>
+                <!-- Step 3: Jan 29 -->
+                <div class="relative pb-12 group">
+                    <div class="absolute -left-[50px] top-0 size-8 bg-emerald-600 flex items-center justify-center border-4 border-black group-hover:bg-off-white transition-colors"></div>
+                    <span class="text-sm font-black text-emerald-600 tracking-widest uppercase block mb-1">JAN 29, 2026</span>
+                    <h3 class="font-black italic text-xl uppercase text-off-white">Exploratory Data Analysis</h3>
+                    <p class="text-gray-400 text-sm mt-2 font-bold uppercase">Identifying seasonal trends, mapping demographic correlations, and cleaning anomalous data points.</p>
+                    <span class="inline-block bg-[#111] text-gray-500 px-3 py-1 font-black text-[10px] tracking-widest mt-4 uppercase border-2 border-gray-800">Completed</span>
+                </div>
+                <!-- Step 4: Feb 5 -->
+                <div class="relative pb-12 group">
+                    <div class="absolute -left-[50px] top-0 size-8 bg-purple-600 flex items-center justify-center border-4 border-black group-hover:bg-off-white transition-colors"></div>
+                    <span class="text-sm font-black text-purple-600 tracking-widest uppercase block mb-1">FEB 5, 2026</span>
+                    <h3 class="font-black italic text-xl uppercase text-off-white">V1 Model Training</h3>
+                    <p class="text-gray-400 text-sm mt-2 font-bold uppercase">Training the initial proof-of-concept models (Random Forest) for daily attendance predictions.</p>
+                    <span class="inline-block bg-[#111] text-gray-500 px-3 py-1 font-black text-[10px] tracking-widest mt-4 uppercase border-2 border-gray-800">Completed</span>
+                </div>
+                <!-- Step 5: Feb 12 -->
+                <div class="relative pb-12 group">
+                    <div class="absolute -left-[50px] top-0 size-8 bg-red-600 flex items-center justify-center border-4 border-black group-hover:bg-off-white transition-colors"></div>
+                    <span class="text-sm font-black text-red-600 tracking-widest uppercase block mb-1">FEB 12, 2026</span>
+                    <h3 class="font-black italic text-xl uppercase text-off-white">Base UI Construction</h3>
+                    <p class="text-gray-400 text-sm mt-2 font-bold uppercase">Prototyping the initial Streamlit dashboard interface for basic data visualization and model interaction.</p>
+                    <span class="inline-block bg-[#111] text-gray-500 px-3 py-1 font-black text-[10px] tracking-widest mt-4 uppercase border-2 border-gray-800">Completed</span>
+                </div>
+                <!-- Step 6: Feb 19 -->
+                <div class="relative pb-12 group">
+                    <div class="absolute -left-[50px] top-0 size-8 bg-blue-600 flex items-center justify-center border-4 border-black group-hover:bg-off-white transition-colors"></div>
+                    <span class="text-sm font-black text-blue-600 tracking-widest uppercase block mb-1">FEB 19, 2026</span>
+                    <h3 class="font-black italic text-xl uppercase text-off-white">Rebuilding & UI Overhaul</h3>
+                    <p class="text-gray-400 text-sm mt-2 font-bold uppercase">Scraping the old frontend and transitioning to a modern, custom dark-mode aesthetic with 3D components.</p>
+                    <span class="inline-block bg-[#111] text-gray-500 px-3 py-1 font-black text-[10px] tracking-widest mt-4 uppercase border-2 border-gray-800">Completed</span>
+                </div>
+                <!-- Step 7: Feb 26 -->
+                <div class="relative pb-12 group">
+                    <div class="absolute -left-[50px] top-0 size-8 bg-emerald-600 flex items-center justify-center border-4 border-black group-hover:bg-off-white transition-colors"></div>
+                    <span class="text-sm font-black text-emerald-600 tracking-widest uppercase block mb-1">FEB 26, 2026</span>
+                    <h3 class="font-black italic text-xl uppercase text-off-white">Hourly DB Transition</h3>
+                    <p class="text-gray-400 text-sm mt-2 font-bold uppercase">Dropping daily resolution to expand data generation for high-fidelity, operating-hour tracking.</p>
+                    <span class="inline-block bg-[#111] text-gray-500 px-3 py-1 font-black text-[10px] tracking-widest mt-4 uppercase border-2 border-gray-800">Completed</span>
+                </div>
+                <!-- Step 8: Mar 5 -->
+                <div class="relative pb-12 group">
+                    <div class="absolute -left-[50px] top-0 size-8 bg-purple-600 flex items-center justify-center border-4 border-black group-hover:bg-off-white transition-colors"></div>
+                    <span class="text-sm font-black text-purple-600 tracking-widest uppercase block mb-1">MAR 5, 2026</span>
+                    <h3 class="font-black italic text-xl uppercase text-off-white">XGBoost Retraining</h3>
+                    <p class="text-gray-400 text-sm mt-2 font-bold uppercase">Training high-capacity XGBoost and CatBoost algorithms against the new hourly psychological behaviors.</p>
+                    <span class="inline-block bg-[#111] text-gray-500 px-3 py-1 font-black text-[10px] tracking-widest mt-4 uppercase border-2 border-gray-800">Completed</span>
+                </div>
+                <!-- Step 9: Mar 12 -->
+                <div class="relative pb-12 group">
+                    <div class="absolute -left-[50px] top-0 size-8 bg-red-600 flex items-center justify-center border-4 border-black group-hover:bg-off-white transition-colors"></div>
+                    <span class="text-sm font-black text-red-600 tracking-widest uppercase block mb-1">MAR 12, 2026</span>
+                    <h3 class="font-black italic text-xl uppercase text-off-white">Smart Recommendations</h3>
+                    <p class="text-gray-400 text-sm mt-2 font-bold uppercase">Implementing backend AI to actively monitor multi-hour spans and flag safer, low-traffic slots.</p>
+                    <span class="inline-block bg-[#111] text-gray-500 px-3 py-1 font-black text-[10px] tracking-widest mt-4 uppercase border-2 border-gray-800">Completed</span>
+                </div>
+                <!-- Step 10: Mar 19 -->
+                <div class="relative group">
+                    <div class="absolute -left-[50px] top-0 size-8 bg-off-white flex items-center justify-center border-4 border-black shadow-[0_0_15px_rgba(255,255,255,0.5)]"></div>
+                    <span class="text-sm font-black text-emerald-500 tracking-widest uppercase block mb-1">MAR 19, 2026</span>
+                    <h3 class="font-black italic text-xl uppercase text-black bg-off-white inline-block px-2">Final Deployment</h3>
+                    <p class="text-gray-400 text-sm mt-3 font-bold uppercase">Integrating the live endpoints, recommendation engines, and active analytics to the final production build.</p>
+                    <span class="inline-block bg-emerald-900 border-2 border-emerald-500 text-emerald-400 px-3 py-1 font-black text-[10px] tracking-widest mt-4 uppercase animate-pulse">Live Module</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section B: Applications & Use Cases -->
+        <div class="lg:col-span-7 space-y-6">
+            <div class="flex items-center gap-3 mb-10 border-b-2 border-gray-800 pb-4">
+                <span class="material-symbols-outlined text-blue-600 text-3xl">grid_view</span>
+                <h2 class="text-3xl font-black italic heading-font text-off-white">USE CASES</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-[#111] p-8 border-4 border-gray-800 torn-paper hover:border-red-600 hover:-translate-y-1 transition-all group">
+                    <span class="material-symbols-outlined text-4xl text-gray-600 mb-6 group-hover:text-red-600 transition-colors">badge</span>
+                    <h3 class="font-black italic text-xl uppercase mb-3">Staff Scheduling</h3>
+                    <p class="text-gray-400 text-sm font-bold uppercase">Predicting attendance surges allows managers to optimize availability and front-desk staffing levels.</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-[#111] p-8 border-4 border-gray-800 torn-paper hover:border-blue-600 hover:-translate-y-1 transition-all group">
+                    <span class="material-symbols-outlined text-4xl text-gray-600 mb-6 group-hover:text-blue-600 transition-colors">build</span>
+                    <h3 class="font-black italic text-xl uppercase mb-3">Equipment Maint.</h3>
+                    <p class="text-gray-400 text-sm font-bold uppercase">Schedule maintenance tasks during projected low-traffic periods to minimize disruption to workouts.</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-[#111] p-8 border-4 border-gray-800 torn-paper hover:border-blue-600 hover:-translate-y-1 transition-all group">
+                    <span class="material-symbols-outlined text-4xl text-gray-600 mb-6 group-hover:text-blue-600 transition-colors">event_busy</span>
+                    <h3 class="font-black italic text-xl uppercase mb-3">Avoiding Peaks</h3>
+                    <p class="text-gray-400 text-sm font-bold uppercase">Members receive dynamic alerts suggesting better times to visit based on live occupancy forecasts.</p>
+                </div>
+                <!-- Card 4 -->
+                <div class="bg-[#111] p-8 border-4 border-gray-800 torn-paper hover:border-red-600 hover:-translate-y-1 transition-all group">
+                    <span class="material-symbols-outlined text-4xl text-gray-600 mb-6 group-hover:text-red-600 transition-colors">monitoring</span>
+                    <h3 class="font-black italic text-xl uppercase mb-3">Resource Allocation</h3>
+                    <p class="text-gray-400 text-sm font-bold uppercase">Data-driven decisions for HVAC settings and ventilation based on expected human density.</p>
+                </div>
+                <!-- Card 5 (New) -->
+                <div class="bg-[#111] p-8 border-4 border-gray-800 torn-paper hover:border-emerald-500 hover:-translate-y-1 transition-all group">
+                    <span class="material-symbols-outlined text-4xl text-gray-600 mb-6 group-hover:text-emerald-500 transition-colors">campaign</span>
+                    <h3 class="font-black italic text-xl uppercase mb-3">Marketing Ops</h3>
+                    <p class="text-gray-400 text-sm font-bold uppercase">Deploy targeted push notifications and promotions during forecasted lulls to drive supplementary traffic.</p>
+                </div>
+                <!-- Card 6 (New) -->
+                <div class="bg-[#111] p-8 border-4 border-gray-800 torn-paper hover:border-purple-500 hover:-translate-y-1 transition-all group">
+                    <span class="material-symbols-outlined text-4xl text-gray-600 mb-6 group-hover:text-purple-500 transition-colors">bolt</span>
+                    <h3 class="font-black italic text-xl uppercase mb-3">Energy Control</h3>
+                    <p class="text-gray-400 text-sm font-bold uppercase">Automatically dial down lighting and gym-floor power consumption hours before drops in attendance.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Action -->
+    <div class="mt-24 p-12 bg-deep-red border-4 border-black torn-paper flex flex-col md:flex-row items-center justify-between gap-8 transform rotate-1">
+        <div>
+            <h2 class="text-4xl font-black italic heading-font text-black mb-2">ENGAGE THE SYSTEM</h2>
+            <p class="text-off-white font-bold uppercase">Access the live prediction engine directly.</p>
+        </div>
+        <button onclick="window.location.href='/predict'" class="bg-black text-off-white px-10 py-5 text-xl font-black italic uppercase hover:bg-off-white hover:text-black transition flex items-center gap-3">
+            <span class="material-symbols-outlined">rocket_launch</span> GET STARTED
+        </button>
+    </div>
+</main>
+
+</body>
+</html>

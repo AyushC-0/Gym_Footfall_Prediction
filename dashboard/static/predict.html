@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>WeGoGym - Prediction Engine</title>
+<!-- Plotly CDN -->
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<!-- Tailwind CSS v3 CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&amp;family=Inter:wght@400;700;900&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<style data-purpose="base-typography">
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0a0a0a;
+      color: #fafafa;
+      overflow-x: hidden;
+    }
+    h1, h2, h3, .heading-font {
+      font-family: 'Oswald', sans-serif;
+      text-transform: uppercase;
+    }
+    .torn-edge-bottom {
+      mask-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1000 20" xmlns="http://www.w3.org/2000/svg"><path d="M0 20 L20 0 L40 15 L60 5 L80 18 L100 2 L120 12 L140 0 L160 15 L180 5 L200 18 L220 2 L240 12 L260 0 L280 15 L300 5 L320 18 L340 2 L360 12 L380 0 L400 15 L420 5 L440 18 L460 2 L480 12 L500 0 L520 15 L540 5 L560 18 L580 2 L600 12 L620 0 L640 15 L660 5 L680 18 L700 2 L720 12 L740 0 L760 15 L780 5 L800 18 L820 2 L840 12 L860 0 L880 15 L900 5 L920 18 L940 2 L960 12 L980 0 L1000 20 Z" fill="black"/></svg>');
+      mask-size: 100% 20px;
+      mask-repeat: no-repeat;
+      mask-position: bottom;
+    }
+    .torn-paper {
+      clip-path: polygon(0% 2%, 5% 0%, 10% 3%, 15% 1%, 20% 4%, 25% 1%, 30% 3%, 35% 0%, 40% 4%, 45% 1%, 50% 3%, 55% 0%, 60% 4%, 65% 1%, 70% 3%, 75% 1%, 80% 4%, 85% 1%, 90% 3%, 95% 0%, 100% 2%, 100% 98%, 95% 100%, 90% 97%, 85% 99%, 80% 96%, 75% 100%, 70% 97%, 65% 99%, 60% 96%, 55% 100%, 50% 97%, 45% 99%, 40% 96%, 35% 100%, 30% 97%, 25% 99%, 20% 96%, 15% 100%, 10% 97%, 5% 99%, 0% 98%);
+    }
+    /* Radical input styles */
+    select, input[type="number"] {
+        background-color: #111 !important;
+        border: 2px solid #333 !important;
+        color: #fafafa !important;
+        border-radius: 0 !important;
+        font-weight: bold;
+    }
+    select:focus, input[type="number"]:focus {
+        border-color: #7f1d1d !important;
+        outline: none;
+        box-shadow: none !important;
+    }
+    input[type="range"] {
+        -webkit-appearance: none;
+        appearance: none; /* Lint Fix */
+        background: #333;
+        height: 6px;
+        border-radius: 0;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none; /* Lint Fix */
+        width: 20px;
+        height: 20px;
+        background: #fafafa;
+        cursor: pointer;
+        border: 2px solid #7f1d1d;
+    }
+</style>
+<style data-purpose="custom-layout">
+    .hero-gradient { background: radial-gradient(circle at center, #1e3a8a 0%, #7f1d1d 50%, #0a0a0a 100%); }
+    .halftone-overlay { background-image: radial-gradient(#ffffff22 1px, transparent 0); background-size: 10px 10px; }
+    .bg-off-white { background-color: #fafafa; }
+    .text-off-white { color: #fafafa; }
+    .bg-deep-red { background-color: #7f1d1d; }
+</style>
+</head>
+<body class="bg-black relative text-off-white">
+
+<!-- BEGIN: Navigation -->
+<nav class="fixed top-0 w-full z-50 p-6 flex justify-between items-center mix-blend-difference bg-black/50 backdrop-blur-md border-b-2 border-gray-900">
+<div class="flex items-center space-x-4">
+<div class="bg-off-white text-black px-4 py-1 font-black italic text-xl torn-paper cursor-pointer" onclick="window.location.href='/'">WEGOGYM</div>
+</div>
+<div class="hidden md:flex space-x-8 text-sm font-bold uppercase tracking-widest text-off-white items-center">
+<a class="hover:text-red-500 transition" href="/">Home</a>
+<a class="hover:text-red-500 transition text-red-500" href="/predict">Prediction Engine</a>
+<a class="hover:text-red-500 transition" href="/compare">Model Comparison</a>
+<a class="hover:text-red-500 transition" href="/overview">Project Overview</a>
+<a class="text-emerald-500 hover:text-emerald-400 font-black italic transition-colors flex items-center gap-1" href="https://forms.cloud.microsoft/r/n44am7K2GN" target="_blank"><span class="material-symbols-outlined text-[1.1rem]">reviews</span> Feedback</a>
+</div>
+</nav>
+
+<main class="py-32 px-6 relative overflow-hidden min-h-screen">
+    <div class="absolute inset-0 halftone-overlay opacity-10 pointer-events-none"></div>
+    <div class="max-w-7xl mx-auto relative z-10">
+        
+        <div class="flex flex-col md:flex-row justify-between items-end mb-16 border-b-4 border-gray-800 pb-8">
+            <div>
+                <h2 class="text-6xl font-black italic text-off-white leading-none heading-font">PREDICTION ENGINE</h2>
+                <p class="text-xl font-bold text-gray-400 mt-2 uppercase">Forecast hourly and weekly footfall.</p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <section class="lg:col-span-8 space-y-8">
+                
+                <!-- Daily Prediction Form -->
+                <div class="bg-[#111] p-8 border-4 border-gray-800 torn-paper">
+                    <div class="flex items-center gap-3 mb-8 border-b-2 border-gray-800 pb-4">
+                        <span class="material-symbols-outlined text-red-600 text-3xl">schedule</span>
+                        <h2 class="text-3xl font-black italic heading-font">HOURLY CONFIGURATION</h2>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="space-y-6">
+                            <label class="block">
+                                <span class="text-xs font-black mb-2 block text-gray-400 uppercase tracking-widest">Day of Week</span>
+                                <select id="p_day" class="w-full px-4 py-3">
+                                    <option>Monday</option><option>Tuesday</option><option>Wednesday</option><option>Thursday</option><option>Friday</option><option>Saturday</option><option>Sunday</option>
+                                </select>
+                            </label>
+                            
+                            <label class="block">
+                                <span class="text-xs font-black mb-2 block text-gray-400 uppercase tracking-widest">Month</span>
+                                <select id="p_month" class="w-full px-4 py-3">
+                                    <option>January</option><option>February</option><option>March</option><option>April</option><option>May</option><option>June</option><option>July</option><option>August</option><option>September</option><option>October</option><option>November</option><option>December</option>
+                                </select>
+                            </label>
+
+                            <div>
+                                <span class="text-xs font-black mb-3 block text-gray-400 uppercase tracking-widest">Session</span>
+                                <div class="flex border-2 border-gray-800 bg-[#0a0a0a]">
+                                    <button onclick="setSession(this, 'Morning')" class="session-btn active flex-1 py-3 text-sm font-black uppercase text-white bg-gray-800">Morning</button>
+                                    <button onclick="setSession(this, 'Evening')" class="session-btn flex-1 py-3 text-sm font-bold uppercase text-gray-500 hover:text-white">Evening</button>
+                                </div>
+                            </div>
+
+                            <label class="block">
+                                <span class="text-xs font-black mb-2 block text-gray-400 uppercase tracking-widest">Hour</span>
+                                <select id="p_hour" class="w-full px-4 py-3">
+                                    <option value="6">6:00 AM</option>
+                                    <option value="7">7:00 AM</option>
+                                    <option value="8">8:00 AM</option>
+                                </select>
+                            </label>
+
+                            <div>
+                                <span class="text-xs font-black mb-3 block text-gray-400 uppercase tracking-widest">Weather Conditions</span>
+                                <div class="grid grid-cols-4 gap-2">
+                                    <button onclick="setWeather(this, 'normal')" class="weather-btn active flex flex-col items-center gap-2 p-3 border-2 border-red-600 bg-red-600 text-white font-bold transition-all hover:bg-red-500">
+                                        <span class="material-symbols-outlined">sunny</span>
+                                        <span class="text-[10px] uppercase">Normal</span>
+                                    </button>
+                                    <button onclick="setWeather(this, 'heavy_rain')" class="weather-btn flex flex-col items-center gap-2 p-3 border-2 border-gray-800 text-gray-400 font-bold hover:border-gray-600 transition-all">
+                                        <span class="material-symbols-outlined">rainy</span>
+                                        <span class="text-[10px] uppercase">Rain</span>
+                                    </button>
+                                    <button onclick="setWeather(this, 'heat')" class="weather-btn flex flex-col items-center gap-2 p-3 border-2 border-gray-800 text-gray-400 font-bold hover:border-gray-600 transition-all">
+                                        <span class="material-symbols-outlined">thermostat</span>
+                                        <span class="text-[10px] uppercase">Heat</span>
+                                    </button>
+                                    <button onclick="setWeather(this, 'cold')" class="weather-btn flex flex-col items-center gap-2 p-3 border-2 border-gray-800 text-gray-400 font-bold hover:border-gray-600 transition-all">
+                                        <span class="material-symbols-outlined">ac_unit</span>
+                                        <span class="text-[10px] uppercase">Cold</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="space-y-8">
+                            <div>
+                                <span class="text-xs font-black mb-3 block text-gray-400 uppercase tracking-widest">Exam Phase</span>
+                                <div class="flex border-2 border-gray-800 bg-[#0a0a0a]">
+                                    <button onclick="setExam(this, 'none')" class="exam-btn active flex-1 py-3 text-sm font-black uppercase text-white bg-gray-800">None</button>
+                                    <button onclick="setExam(this, 'midterm')" class="exam-btn flex-1 py-3 text-sm font-bold uppercase text-gray-500 hover:text-white">Midterm</button>
+                                    <button onclick="setExam(this, 'endterm')" class="exam-btn flex-1 py-3 text-sm font-bold uppercase text-gray-500 hover:text-white">Endterm</button>
+                                </div>
+                            </div>
+
+                            <div>
+                                <span class="text-xs font-black mb-3 block text-gray-400 uppercase tracking-widest">Maintenance Level</span>
+                                <div class="flex border-2 border-gray-800 bg-[#0a0a0a]">
+                                    <button onclick="setMaint(this, 'none')" class="maint-btn active flex-1 py-3 text-sm font-black uppercase text-white bg-gray-800">None</button>
+                                    <button onclick="setMaint(this, 'low')" class="maint-btn flex-1 py-3 text-sm font-bold uppercase text-gray-500 hover:text-white">Low</button>
+                                    <button onclick="setMaint(this, 'med')" class="maint-btn flex-1 py-3 text-sm font-bold uppercase text-gray-500 hover:text-white">Med</button>
+                                    <button onclick="setMaint(this, 'high')" class="maint-btn flex-1 py-3 text-sm font-bold uppercase text-gray-500 hover:text-white">High</button>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between p-4 bg-[#0a0a0a] border-2 border-gray-800 torn-paper">
+                                <div class="flex flex-col">
+                                    <span class="font-black italic uppercase">University Vacation</span>
+                                </div>
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input id="p_vacation" class="sr-only peer" type="checkbox" value=""/>
+                                    <div class="w-11 h-6 bg-gray-700 peer-focus:outline-none peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:h-5 after:w-5 after:transition-all peer-checked:bg-red-600"></div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 pt-8 border-t-2 border-gray-800">
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs font-black text-gray-400 uppercase tracking-widest">Active Students</span>
+                                <span id="pop_val" class="text-red-600 font-black text-xl">250</span>
+                            </div>
+                            <input id="p_pop" class="w-full cursor-pointer" max="500" min="0" type="range" value="250" oninput="document.getElementById('pop_val').innerText=this.value"/>
+                        </div>
+                    </div>
+
+                    <div class="mt-10 flex justify-end">
+                        <button onclick="generatePrediction()" class="bg-off-white text-black px-10 py-4 text-xl font-black italic uppercase hover:bg-blue-600 hover:text-white transition transform -rotate-1 w-full md:w-auto">
+                            INITIALIZE SYSTEM →
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Through the Day Forecast -->
+                <div class="bg-deep-red p-8 border-4 border-black torn-paper relative overflow-hidden mt-8">
+                    <div class="absolute inset-0 halftone-overlay opacity-20"></div>
+                    <div class="relative z-10">
+                        <div class="flex items-center gap-3 mb-8 border-b-2 border-black pb-4">
+                            <span class="material-symbols-outlined text-black text-3xl">schedule</span>
+                            <h2 class="text-3xl font-black italic text-black heading-font">THROUGH THE DAY PROJECTION</h2>
+                        </div>
+                        
+                        <p class="text-xs font-black uppercase text-black mb-6 tracking-widest">HOURLY FOOTFALL BASED ON CURRENT PARAMETERS</p>
+                        
+                        <div id="daily_chart_container" class="relative h-[350px] w-full bg-[#111] border-2 border-black px-2 py-4 overflow-hidden">
+                            <div class="absolute inset-0 flex flex-col items-center justify-center z-10 text-off-white" id="daily_chart_placeholder">
+                                <span class="material-symbols-outlined text-4xl mb-2">show_chart</span>
+                                <p class="font-bold uppercase tracking-widest text-xs">Awaiting Parameters</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+            
+            <aside class="lg:col-span-4 space-y-8">
+                <!-- Status Output -->
+                <div class="bg-[#111] p-8 border-4 border-gray-800 torn-paper flex flex-col items-center text-center">
+                    <span class="text-xs font-black text-gray-400 uppercase tracking-widest mb-6">LIVE TELEMETRY</span>
+                    
+                    <div class="size-56 border-[8px] border-gray-800 border-dashed flex flex-col items-center justify-center relative mb-8" id="status_circle_container">
+                        <div class="absolute inset-0 border-[8px] border-red-600 border-t-transparent border-l-transparent rotate-45 transition-all duration-1000" id="status_circle_ring"></div>
+                        <span id="out_status" class="text-5xl font-black italic glitch-text text-off-white uppercase">HIGH</span>
+                        <span class="text-xs font-black text-gray-500 mt-2 tracking-widest uppercase">CAPACITY</span>
+                    </div>
+                    
+                    <h3 id="out_val" class="text-3xl font-black italic uppercase leading-none mb-4">TRAFFIC: 420</h3>
+                    <p id="out_desc" class="text-sm font-bold text-gray-400 px-4">Based on current parameters, the gym is expected to reach near-peak capacity. Consider staffing increases.</p>
+                </div>
+
+                <!-- Smart Recommendation Alert -->
+                <div id="recommendation_panel" class="bg-[#111] p-6 border-4 border-gray-800 torn-paper hidden">
+                    <div class="flex items-start gap-3">
+                        <span class="material-symbols-outlined text-blue-500 text-2xl flex-shrink-0 mt-0.5">tips_and_updates</span>
+                        <p id="recommendation_text" class="text-sm font-bold text-gray-300 leading-relaxed"></p>
+                    </div>
+                </div>
+
+                <!-- Engine Info -->
+                <div class="bg-blue-600 p-8 torn-paper border-4 border-black text-off-white transform rotate-1">
+                    <h3 class="font-black italic uppercase heading-font text-2xl mb-6">Engine Intel</h3>
+                    <div class="space-y-4">
+                        <div class="flex gap-4 p-3 bg-black/20 hover:bg-black/40 transition">
+                            <span class="material-symbols-outlined text-black">psychology</span>
+                            <div>
+                                <p class="text-sm font-black uppercase">XGBOOST CORE</p>
+                                <p class="text-[10px] uppercase font-bold text-blue-200">R2: 0.954 | PRE-TRAINED WEIGHTS</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 p-3 bg-black/20 hover:bg-black/40 transition">
+                            <span class="material-symbols-outlined text-black">cloud_done</span>
+                            <div>
+                                <p class="text-sm font-black uppercase">SYNC ACTIVE</p>
+                                <p class="text-[10px] uppercase font-bold text-blue-200">LOCAL SQLITE DATASTORE</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+</main>
+
+
+<script>
+let currentWeather = 'normal';
+let currentExam = 'none';
+let currentMaint = 'none';
+let currentSession = 'Morning';
+
+const sessionHours = {
+    Morning: [{value: 6, label: '6:00 AM'}, {value: 7, label: '7:00 AM'}, {value: 8, label: '8:00 AM'}],
+    Evening: [{value: 17, label: '5:00 PM'}, {value: 18, label: '6:00 PM'}, {value: 19, label: '7:00 PM'}]
+};
+
+function setSession(el, val) {
+    document.querySelectorAll('.session-btn').forEach(btn => {
+        btn.className = 'session-btn flex-1 py-3 text-sm font-bold uppercase text-gray-500 hover:text-white';
+    });
+    el.className = 'session-btn active flex-1 py-3 text-sm font-black uppercase text-white bg-gray-800';
+    currentSession = val;
+    updateHourDropdown();
+}
+
+function updateHourDropdown() {
+    const sel = document.getElementById('p_hour');
+    sel.innerHTML = '';
+    sessionHours[currentSession].forEach(h => {
+        const opt = document.createElement('option');
+        opt.value = h.value;
+        opt.textContent = h.label;
+        sel.appendChild(opt);
+    });
+}
+
+function setWeather(el, val) {
+    document.querySelectorAll('.weather-btn').forEach(btn => {
+        btn.className = 'weather-btn flex flex-col items-center gap-2 p-3 border-2 border-gray-800 text-gray-400 font-bold hover:border-gray-600 transition-all';
+    });
+    el.className = 'weather-btn active flex flex-col items-center gap-2 p-3 border-2 border-red-600 bg-red-600 text-white font-bold transition-all hover:bg-red-500';
+    currentWeather = val;
+}
+function setExam(el, val) {
+    document.querySelectorAll('.exam-btn').forEach(btn => {
+        btn.className = 'exam-btn flex-1 py-3 text-sm font-bold uppercase text-gray-500 hover:text-white';
+    });
+    el.className = 'exam-btn active flex-1 py-3 text-sm font-black uppercase text-white bg-gray-800';
+    currentExam = val;
+}
+function setMaint(el, val) {
+    document.querySelectorAll('.maint-btn').forEach(btn => {
+        btn.className = 'maint-btn flex-1 py-3 text-sm font-bold uppercase text-gray-500 hover:text-white';
+    });
+    el.className = 'maint-btn active flex-1 py-3 text-sm font-black uppercase text-white bg-gray-800';
+    currentMaint = val;
+}
+
+async function generatePrediction() {
+    const payload = {
+        day: document.getElementById('p_day').value,
+        month: document.getElementById('p_month').value,
+        year: 2025,
+        session: currentSession,
+        hour: parseInt(document.getElementById('p_hour').value),
+        is_vacation: document.getElementById('p_vacation').checked,
+        pop: parseInt(document.getElementById('p_pop').value),
+        exam: currentExam,
+        weather: currentWeather,
+        maint: currentMaint
+    };
+
+    try {
+        const response = await fetch('/api/predict', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(payload)
+        });
+        const data = await response.json();
+        const pred = data.prediction;
+        const status = data.status;
+        const desc = data.description;
+        
+        document.getElementById('out_val').innerText = 'TRAFFIC: ' + pred;
+        
+        let colorClass = 'text-green-500';
+        let borderClass = 'border-green-500';
+        
+        if (status === 'HIGH') {
+            colorClass = 'text-red-600';
+            borderClass = 'border-red-600';
+        } else if (status === 'MED') {
+            colorClass = 'text-blue-500';
+            borderClass = 'border-blue-500';
+        }
+        
+        const outStatus = document.getElementById('out_status');
+        outStatus.innerText = status;
+        document.getElementById('out_desc').innerText = desc;
+        
+        const circleContainer = document.getElementById('status_circle_container');
+        const circleRing = document.getElementById('status_circle_ring');
+        
+        let glitch = (status === 'HIGH') ? 'glitch-text text-off-white' : colorClass;
+
+        circleContainer.className = `size-56 border-[8px] border-gray-800 border-dashed flex flex-col items-center justify-center relative mb-8 transition-all duration-500`;
+        circleRing.className = `absolute inset-0 border-[8px] ${borderClass} border-t-transparent border-l-transparent rotate-[225deg] transition-all duration-1000`;
+        outStatus.className = `text-5xl font-black italic uppercase ${glitch} transition-colors duration-500`;
+
+        // Smart Recommendation
+        const recPanel = document.getElementById('recommendation_panel');
+        const recText = document.getElementById('recommendation_text');
+        if (data.recommendation_text && data.recommendation_text.length > 0) {
+            recText.innerText = data.recommendation_text;
+            recPanel.classList.remove('hidden');
+        } else {
+            recPanel.classList.add('hidden');
+        }
+        
+        // Auto-refresh daily projection
+        await generateDailyForecast();
+        
+    } catch(err) {
+        console.error(err);
+    }
+}
+async function generateDailyForecast() {
+    const payload = {
+        day: document.getElementById('p_day').value,
+        month: document.getElementById('p_month').value,
+        year: 2025,
+        session: currentSession,
+        hour: parseInt(document.getElementById('p_hour').value),
+        is_vacation: document.getElementById('p_vacation').checked,
+        pop: parseInt(document.getElementById('p_pop').value),
+        exam: currentExam,
+        weather: currentWeather,
+        maint: currentMaint
+    };
+
+    try {
+        const response = await fetch('/api/daily_forecast', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(payload)
+        });
+        const data = await response.json();
+        
+        let container = document.getElementById('daily_chart_container');
+        let placeholder = document.getElementById('daily_chart_placeholder');
+        if (placeholder) placeholder.style.display = 'none';
+        
+        let x_labels = [];
+        let y_values = [];
+        let bar_colors = [];
+        
+        data.forecasts.forEach((item) => {
+            x_labels.push(item.label);
+            y_values.push(item.prediction);
+            
+            // Re-creating the original color scale logic
+            if (item.prediction >= 65) {
+                bar_colors.push('#dc2626'); // text-red-600
+            } else if (item.prediction >= 35) {
+                bar_colors.push('#9ca3af'); // text-gray-400
+            } else if (item.prediction === 0) {
+                bar_colors.push('#000000'); // black
+            } else {
+                bar_colors.push('#2563eb'); // text-blue-600
+            }
+        });
+        
+        let trace = {
+            x: x_labels,
+            y: y_values,
+            type: 'bar',
+            marker: { 
+                color: bar_colors,
+                line: { color: 'rgba(0,0,0,0)' }
+            }
+        };
+        
+        let layout = {
+            paper_bgcolor: 'rgba(0,0,0,0)',
+            plot_bgcolor: 'rgba(0,0,0,0)',
+            margin: { t: 40, r: 20, b: 60, l: 40 },
+            font: { family: 'Inter', color: '#fafafa' },
+            xaxis: {
+                type: 'category',
+                tickmode: 'array',
+                tickvals: x_labels,
+                ticktext: x_labels,
+                showgrid: true,
+                gridcolor: '#333',
+                tickfont: { size: 12, color: '#ffffff' }
+            },
+            yaxis: {
+                showgrid: true,
+                gridcolor: '#333',
+                tickfont: { size: 12, color: '#ffffff' },
+                zeroline: false
+            },
+            hovermode: 'x unified'
+        };
+        
+        Plotly.newPlot('daily_chart_container', [trace], layout, {displayModeBar: false, responsive: true});
+        
+    } catch(err) {
+        console.error(err);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    updateHourDropdown();
+    generatePrediction(); // this now also triggers generateDailyForecast()
+});
+
+</script>
+</body>
+</html>
