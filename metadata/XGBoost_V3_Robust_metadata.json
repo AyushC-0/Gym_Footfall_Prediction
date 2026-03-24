@@ -1,0 +1,28 @@
+{
+    "version": "V3.0",
+    "type": "Robust Production",
+    "description": "Model trained with Context Features and Temporal Splits to handle Drift.",
+    "training_date": "2026-03-25",
+    "metrics": {
+        "RMSE": 4.208003619783534,
+        "R2": 0.9831549525260925,
+        "MAPE": 7.498133182525635
+    },
+    "improvements": [
+        "Dropped 'year' feature to prevent tree extrapolation failure.",
+        "Added 'total_daily_slots' as a density context feature.",
+        "Applied sample weighting for 2026 behavior.",
+        "Enforced strict Time-Series split validation (no leakage)."
+    ],
+    "features": [
+        "hour",
+        "day_of_week",
+        "month",
+        "active_student_population",
+        "session",
+        "exam_phase",
+        "weather_condition",
+        "maintenance_severity",
+        "total_daily_slots"
+    ]
+}

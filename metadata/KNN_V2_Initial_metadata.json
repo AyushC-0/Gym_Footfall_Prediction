@@ -1,0 +1,21 @@
+{
+    "version": "V2.0",
+    "type": "Hourly High-Fidelity",
+    "description": "Initial hourly simulator with behavioral biases.",
+    "training_date": "2026-03-24",
+    "metrics": {
+        "RMSE": 2.61,
+        "R2": 0.7
+    },
+    "features": [
+        "hour",
+        "day_of_week",
+        "month",
+        "year",
+        "active_student_population",
+        "session",
+        "exam_phase",
+        "weather_condition",
+        "maintenance_severity"
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "version": "V2.1-Drift",
+    "type": "Out-of-Distribution Test",
+    "description": "Metrics of V2 models when exposed to 2026 schedule shifts (Drift).",
+    "test_date": "2026-03-25",
+    "metrics": {
+        "RMSE": 25.4
+    },
+    "status": "FAILED - Structural schedule shift caused catastrophic accuracy drop."
+}

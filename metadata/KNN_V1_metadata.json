@@ -1,0 +1,17 @@
+{
+    "version": "V1",
+    "type": "Legacy Daily",
+    "description": "Daily granularity footfall prediction (Baseline).",
+    "training_date": "2026-03-17",
+    "metrics": {
+        "RMSE": 22.4,
+        "R2": 0.55
+    },
+    "features": [
+        "date",
+        "day_of_week",
+        "month",
+        "year",
+        "active_student_population"
+    ]
+}
