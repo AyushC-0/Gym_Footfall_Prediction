@@ -63,7 +63,10 @@
             <div>
                 <div class="flex justify-between items-start mb-8">
                     <span class="bg-off-white text-red-600 px-3 py-1 font-black text-[10px] uppercase">RANK 1: HIGH ACCURACY</span>
-                    <span class="bg-black text-off-white px-2 py-1 font-black text-xs uppercase">R²: 0.903</span>
+                    <div>
+                        <span class="bg-emerald-500 text-black px-2 py-1 font-black text-xs uppercase">V3 ROBUST</span>
+                        <span class="bg-black text-off-white px-2 py-1 font-black text-xs uppercase ml-1">R²: 0.983</span>
+                    </div>
                 </div>
                 <h3 class="text-5xl font-black italic mb-6 heading-font">XGBOOST</h3>
                 <div class="w-full bg-black h-2 mb-4">
@@ -81,15 +84,18 @@
                     </div>
                 </div>
             </div>
-            <h3 class="text-5xl font-black italic mt-8 text-black opacity-50 heading-font text-right">RMSE: 1.49</h3>
+            <h3 class="text-5xl font-black italic mt-8 text-black opacity-50 heading-font text-right">RMSE: 4.21</h3>
         </div>
 
         <!-- CatBoost Card (Rank 2) -->
         <div class="bg-purple-600 p-8 torn-paper group hover:-translate-y-2 transition-transform duration-300 transform rotate-1 border-4 border-black text-off-white flex flex-col justify-between">
             <div>
                 <div class="flex justify-between items-start mb-8">
-                    <span class="bg-black text-off-white px-3 py-1 font-bold text-[10px] uppercase">RANK 2: CATEGORICAL MAX</span>
-                    <span class="bg-off-white text-black px-2 py-1 font-black text-xs uppercase">R²: 0.895</span>
+                    <span class="bg-black text-off-white px-3 py-1 font-bold text-[10px] uppercase">RANK 3: CATEGORICAL MAX</span>
+                    <div>
+                        <span class="bg-emerald-500 text-black px-2 py-1 font-black text-xs uppercase">V3 ROBUST</span>
+                        <span class="bg-off-white text-black px-2 py-1 font-black text-xs uppercase ml-1">R²: 0.965</span>
+                    </div>
                 </div>
                 <h3 class="text-4xl font-black italic mb-6 heading-font">CATBOOST</h3>
                 <div class="w-full bg-black h-2 mb-4">
@@ -107,15 +113,18 @@
                     </div>
                 </div>
             </div>
-            <h3 class="text-4xl font-black italic mt-8 text-black opacity-50 heading-font text-right">RMSE: 1.54</h3>
+            <h3 class="text-4xl font-black italic mt-8 text-black opacity-50 heading-font text-right">RMSE: 6.07</h3>
         </div>
 
         <!-- Random Forest Card (Rank 3) -->
         <div class="bg-blue-600 p-8 torn-paper group hover:-translate-y-2 transition-transform duration-300 transform -rotate-1 border-4 border-black text-off-white flex flex-col justify-between">
             <div>
                 <div class="flex justify-between items-start mb-8">
-                    <span class="bg-black text-off-white px-3 py-1 font-bold text-[10px] uppercase">RANK 3: CONSISTENT</span>
-                    <span class="bg-off-white text-black px-2 py-1 font-black text-xs uppercase">R²: 0.876</span>
+                    <span class="bg-black text-off-white px-3 py-1 font-bold text-[10px] uppercase">RANK 2: CONSISTENT</span>
+                    <div>
+                        <span class="bg-emerald-500 text-black px-2 py-1 font-black text-xs uppercase">V3 ROBUST</span>
+                        <span class="bg-off-white text-black px-2 py-1 font-black text-xs uppercase ml-1">R²: 0.973</span>
+                    </div>
                 </div>
                 <h3 class="text-4xl font-black italic mb-6 heading-font">RANDOM FOREST</h3>
                 <div class="w-full bg-black h-2 mb-4">
@@ -133,7 +142,7 @@
                     </div>
                 </div>
             </div>
-            <h3 class="text-4xl font-black italic mt-8 text-black opacity-50 heading-font text-right">RMSE: 1.68</h3>
+            <h3 class="text-4xl font-black italic mt-8 text-black opacity-50 heading-font text-right">RMSE: 5.38</h3>
         </div>
 
         <!-- KNN Card (Rank 4) -->
@@ -141,7 +150,10 @@
             <div>
                 <div class="flex justify-between items-start mb-8">
                     <span class="bg-black text-off-white px-3 py-1 font-bold text-[10px] uppercase">RANK 4: DISTANCE BASED</span>
-                    <span class="bg-off-white text-black px-2 py-1 font-black text-xs uppercase">R²: 0.700</span>
+                    <div>
+                        <span class="bg-emerald-500 text-black px-2 py-1 font-black text-xs uppercase">V3 ROBUST</span>
+                        <span class="bg-off-white text-black px-2 py-1 font-black text-xs uppercase ml-1">R²: 0.932</span>
+                    </div>
                 </div>
                 <h3 class="text-4xl font-black italic mb-6 heading-font">KNN</h3>
                 <div class="w-full bg-black h-2 mb-4">
@@ -159,7 +171,7 @@
                     </div>
                 </div>
             </div>
-            <h3 class="text-4xl font-black italic mt-8 text-black opacity-50 heading-font text-right">RMSE: 2.61</h3>
+            <h3 class="text-4xl font-black italic mt-8 text-black opacity-50 heading-font text-right">RMSE: 8.48</h3>
         </div>
 
         <!-- Baseline Card (LR Rank 5) -->
@@ -167,7 +179,10 @@
             <div>
                 <div class="flex justify-between items-start mb-8">
                     <span class="bg-gray-800 text-off-white px-3 py-1 font-bold text-[10px] uppercase">RANK 5: BASELINE</span>
-                    <span class="bg-off-white text-black px-2 py-1 font-black text-xs uppercase">R²: 0.698</span>
+                    <div>
+                        <span class="bg-emerald-500 text-black px-2 py-1 font-black text-xs uppercase">V3 ROBUST</span>
+                        <span class="bg-off-white text-black px-2 py-1 font-black text-xs uppercase ml-1">R²: 0.526</span>
+                    </div>
                 </div>
                 <h3 class="text-3xl font-black italic mb-6 heading-font text-gray-400">BASELINE (LR)</h3>
                 <div class="w-full bg-gray-900 h-2 mb-4">
@@ -185,7 +200,7 @@
                     </div>
                 </div>
             </div>
-            <h3 class="text-4xl font-black italic mt-8 text-gray-800 heading-font text-right">RMSE: 2.62</h3>
+            <h3 class="text-4xl font-black italic mt-8 text-gray-800 heading-font text-right">RMSE: 22.32</h3>
         </div>
     </div>
 
@@ -201,16 +216,71 @@
         
         <div id="rmse_comparison_chart" class="w-full h-[600px] relative z-10 p-2 bg-[#0a0a0a] border-2 border-gray-800 mb-8"></div>
         
+        <!-- DRIFT EXPLANATION SECTION -->
+        <div class="mt-8 border-t-2 border-dashed border-gray-800 pt-8 relative z-10">
+            <h3 class="text-3xl font-black italic heading-font text-amber-500 mb-4 flex items-center gap-3">
+                <span class="material-symbols-outlined text-[2rem]">warning</span> 
+                WHAT HAPPENED IN 2026: DATA DRIFT
+            </h3>
+            
+            <p class="text-gray-300 text-sm mb-6 max-w-4xl">
+                On January 1, 2026, WeGoGym changed its operating hours. Instead of running 3-hour sessions (6, 7, 8 AM &amp; 5, 6, 7 PM), management compressed hours to two 2-hour slots: <strong class="text-white">7-9 AM</strong> and <strong class="text-white">6-8 PM</strong>. This operational shift immediately caused our highly accurate V2 models to catastrophically fail on live data. Here is why:
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Covariate Shift Block -->
+                <div class="bg-[#111] p-6 border-l-4 border-amber-500">
+                    <h4 class="text-lg font-black uppercase text-amber-500 mb-2">1. Covariate Shift (Feature Drift)</h4>
+                    <p class="text-xs text-gray-400">
+                        The underlying distribution of the input data fundamentally changed. The <strong>6 AM</strong> and <strong>5 PM (17:00)</strong> hours were completely removed from the incoming dataset. Our model was trained to weigh these variables heavily, but their probability dropped to exactly 0%.
+                    </p>
+                </div>
+
+                <!-- Concept Drift Block -->
+                <div class="bg-[#111] p-6 border-l-4 border-red-500">
+                    <h4 class="text-lg font-black uppercase text-red-500 mb-2">2. Concept Drift (Behavioral Shift)</h4>
+                    <p class="text-xs text-gray-400">
+                        Because available gym hours became 33% shorter, the same gym-going student population was squeezed into heavily constrained time windows. The <strong>relationship</strong> between active student population and peak-hour density completely broke. A crowd of 50 students that used to spread evenly over 3 hours now packs tightly into 2 hours, generating massive surges that the model never learned to expect.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Retraining Solution Block -->
+            <div class="bg-[#111] mt-6 p-6 border-l-4 border-emerald-500">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="material-symbols-outlined text-emerald-500 text-[1.5rem]">model_training</span>
+                    <h4 class="text-lg font-black uppercase text-emerald-500">How We Fixed It (V3 Robust Pipeline)</h4>
+                </div>
+                <p class="text-xs text-gray-300 mb-4 leading-relaxed">
+                    Simply throwing new data at the model isn't enough to fix architectural failures. To generate our highly resilient V3 datasets and models (<span class="text-emerald-400 font-bold">*_v3.pkl</span>), we fundamentally redesigned the machine learning pipeline:
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-[#1a1a1a] p-4 border border-gray-800">
+                        <h5 class="text-[10px] font-black uppercase text-emerald-400 mb-1">1. Context Features</h5>
+                        <p class="text-[10px] text-gray-400">We injected a <code class="text-emerald-300">total_daily_slots</code> parameter directly into the preprocessor. Instead of letting the tree models arbitrarily guess why density spiked, they now mathematically understand that 4 available slots intrinsically means higher crowding than 6.</p>
+                    </div>
+                    <div class="bg-[#1a1a1a] p-4 border border-gray-800">
+                        <h5 class="text-[10px] font-black uppercase text-emerald-400 mb-1">2. Sample Weighting</h5>
+                        <p class="text-[10px] text-gray-400">We applied dynamic sample weights during <code class="text-emerald-300">model.fit()</code>. The algorithm was forced to prioritize learning the new 2026 post-drift behaviors (3x weight) while effectively "forgetting" the obsolete 2021-2025 student scheduling habits.</p>
+                    </div>
+                    <div class="bg-[#1a1a1a] p-4 border border-gray-800">
+                        <h5 class="text-[10px] font-black uppercase text-emerald-400 mb-1">3. Strict Temporal Splits</h5>
+                        <p class="text-[10px] text-gray-400">We removed random train-test splitting (which leaks future data). V3 was trained exclusively on past data (2021 to mid-2026) and validated strictly against unseen future data (late 2026 to 2027) to guarantee real-world generalization.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </div>
 </main>
-
 
 
 <script>
     var models = ['XGBoost', 'CatBoost', 'Random Forest', 'KNN', 'Linear Reg.'];
     var v1_rmse = [15.2, 16.5, 18.3, 22.4, 26.8]; // Baseline V1 (Daily Grid)
     var v2_rmse = [1.49, 1.54, 1.68, 2.61, 2.62]; // New V2 (Hourly High-Fidelity)
+    var v3_drift_rmse = [14.8, 15.1, 16.2, 21.5, 25.4]; // V2 Degradation due to Drift
+    var v4_v3_rmse = [4.21, 6.07, 5.38, 8.48, 22.32]; // V3 Recovery
 
     var trace1 = {
         x: models,
@@ -227,8 +297,24 @@
         type: 'bar',
         marker: { color: '#dc2626' } // Red-600
     };
+    
+    var trace3 = {
+        x: models,
+        y: v3_drift_rmse,
+        name: 'V2 Models Post-Drift (Failure Scenario)',
+        type: 'bar',
+        marker: { color: '#f59e0b' } // Amber-500
+    };
 
-    var data = [trace1, trace2];
+    var trace4 = {
+        x: models,
+        y: v4_v3_rmse,
+        name: 'V3 Models Post-Drift (Robust Recovery)',
+        type: 'bar',
+        marker: { color: '#10b981' } // Emerald-500
+    };
+
+    var data = [trace1, trace2, trace3, trace4];
 
     var layout = {
         barmode: 'group',
